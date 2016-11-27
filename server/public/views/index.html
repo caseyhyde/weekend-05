@@ -6,29 +6,29 @@
     <script type="text/javascript" src="vendor/angular.min.js">
 
     </script>
-    <script type="text/javascript" src="scripts/forms.js"></script>
+    <script type="text/javascript" src="scripts/client.js"></script>
     <link rel="stylesheet" href="styles/style.css" />
   </head>
-  <body>
+  <body ng-app="myApp">
     <h1>Employee Information Form</h1>
-    <section>
+    <section ng-controller="employeesController as ec">
       <form id="employeeForm">
         <label for="employeeFirstName">First Name:</label>
-        <input type="text" id="employeeFirstName" name="employeeFirstName" />
+        <input type="text" id="employeeFirstName" name="employeeFirstName" ng-model="ec.newEmployee.first_name"/>
 
         <label for="employeeLastName">Last Name:</label>
-        <input type="text" id="employeeLastName" name="employeeLastName" />
+        <input type="text" id="employeeLastName" name="employeeLastName" ng-model="ec.newEmployee.last_name" />
 
         <label for="IDNumber">ID Number:</label>
-        <input type="text" id="IDNumber" name="IDNumber" />
+        <input type="text" id="IDNumber" name="IDNumber" ng-model="ec.newEmployee.employee_id" />
 
         <label for="jobTitle">Job Title:</label>
-        <input type="text" id="jobTitle" name="jobTitle" />
+        <input type="text" id="jobTitle" name="jobTitle" ng-model="ec.newEmployee.jobTitle" />
 
         <label for="annualSalary">Annual Salary:</label>
-        <input type="number" id="annualSalary" name="annualSalary" required /><br>
+        <input type="number" id="annualSalary" name="annualSalary" ng-model="ec.newEmployee.annual_salary" /><br>
 
-        <input type="submit" id="submit" value="Submit Employee"/>
+        <input type="submit" id="submit" value="Submit Employee" ng-click="ec.addEmployee()" />
 
       </form>
       <h2>Employee List</h2>
@@ -43,10 +43,18 @@
           </tr>
         </thead>
         <tbody>
+          <tr ng-repeat="employee in ec.employees | filter:true">
+            <td ng-model="employee.first_name">{{employee.first_name}}</td>
+            <td ng-model="employee.last_name">{{employee.last_name}}</td>
+            <td ng-model="employee.id">{{employee.employee_id}}</td>
+            <td ng-model="employee.job_title">{{employee.job_title}}</td>
+            <td ng-model="employee.annual_salary">{{employee.annual_salary}}</td>
+            <td ng-model="employee.active" ng-click="ec.activeToggle(employee)">{{employee.active}}</td>
+          </tr>
         </tbody>
       </table>
       <h2>Total Monthly Salary Expenditure</h2>
-      <div id="salaryCalc"></div>
+      <div id="salaryCalc" ng-model="ec.salary">${{ec.salary}}</div>
     </section>
   </body>
 </html>
