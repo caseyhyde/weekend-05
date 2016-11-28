@@ -21,7 +21,7 @@ myApp.controller('employeesController', ["$http", function($http) {
       .then(function(response) {
         console.log("New Employee: ", self.newEmployee);
         getEmployees();
-        self.newEmployee = {};
+        self.newEmployee = {};//clear input fields
       })//end then
   }
 
@@ -37,7 +37,8 @@ myApp.controller('employeesController', ["$http", function($http) {
     $http.get('/salaries')
       .then(function(response) {
         console.log("Received salary budget from server: ", response.data);
-        self.salaries = response.data;
+        self.salaries = response.data[0].budget;
+        console.log(self.salaries);
       });//end then
   }
 }]);

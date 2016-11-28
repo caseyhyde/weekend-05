@@ -7,32 +7,33 @@
 
     </script>
     <script type="text/javascript" src="scripts/client.js"></script>
+    <link rel="stylesheet" href="vendor/bootstrap.min.css" />
     <link rel="stylesheet" href="styles/style.css" />
   </head>
   <body ng-app="myApp">
-    <h1>Employee Information Form</h1>
+    <h1>Employee Information</h1>
     <section ng-controller="employeesController as ec">
       <form id="employeeForm">
-        <label for="employeeFirstName">First Name:</label>
-        <input type="text" id="employeeFirstName" name="employeeFirstName" ng-model="ec.newEmployee.first_name"/>
+        <!-- <label for="employeeFirstName">First Name:</label> -->
+        <input required type="text" id="employeeFirstName" class="col-md-4" name="employeeFirstName" placeholder="First Name" ng-model="ec.newEmployee.first_name"/>
 
-        <label for="employeeLastName">Last Name:</label>
-        <input type="text" id="employeeLastName" name="employeeLastName" ng-model="ec.newEmployee.last_name" />
+        <!-- <label for="employeeLastName">Last Name:</label> -->
+        <input required type="text" id="employeeLastName" class="col-md-4" name="employeeLastName" placeholder="Last Name" ng-model="ec.newEmployee.last_name" />
 
-        <label for="IDNumber">ID Number:</label>
-        <input type="text" id="IDNumber" name="IDNumber" ng-model="ec.newEmployee.employee_id" />
+        <!-- <label for="IDNumber">ID Number:</label> -->
+        <input required type="text" id="IDNumber" class="col-md-4" name="IDNumber" placeholder="Employee ID" ng-model="ec.newEmployee.employee_id" />
 
-        <label for="jobTitle">Job Title:</label>
-        <input type="text" id="jobTitle" name="jobTitle" ng-model="ec.newEmployee.jobTitle" />
+        <!-- <label for="jobTitle">Job Title:</label> -->
+        <input required type="text" id="jobTitle" class="col-md-4" name="jobTitle" placeholder="Job Title" ng-model="ec.newEmployee.jobTitle" />
 
-        <label for="annualSalary">Annual Salary:</label>
-        <input type="number" id="annualSalary" name="annualSalary" ng-model="ec.newEmployee.annual_salary" /><br>
+        <!-- <label for="annualSalary">Annual Salary:</label> -->
+        <input required type="number" id="annualSalary" class="col-md-4" name="annualSalary" placeholder="Annual Salary" ng-model="ec.newEmployee.annual_salary" /><br>
 
         <input type="submit" id="submit" value="Submit Employee" ng-click="ec.addEmployee()" />
 
       </form>
       <h2>Employee List</h2>
-      <table id="container">
+      <table id="container" class= "table table-striped table-bordered table-hover table-condensed table-responsive">
         <thead>
           <tr>
             <td>First Name</td>
@@ -40,22 +41,23 @@
             <td>ID Number</td>
             <td>Job Title</td>
             <td>Annual Salary</td>
+            <td>Active</td>
           </tr>
         </thead>
         <tbody>
           <tr ng-repeat="employee in ec.employees | orderBy:'last_name'">
-            <td ng-model="employee.first_name">{{employee.first_name}}</td>
-            <td ng-model="employee.last_name">{{employee.last_name}}</td>
-            <td ng-model="employee.employee_id">{{employee.employee_id}}</td>
-            <td ng-model="employee.job_title">{{employee.job_title}}</td>
-            <td ng-model="employee.annual_salary">{{employee.annual_salary}}</td>
-            <td ng-model="employee.active" ng-click="ec.activeToggle(employee)">{{employee.active}}</td>
+            <td ng-model="employee">{{employee.first_name}}</td>
+            <td ng-model="employee">{{employee.last_name}}</td>
+            <td ng-model="employee">{{employee.employee_id}}</td>
+            <td ng-model="employee">{{employee.job_title}}</td>
+            <td ng-model="employee">${{employee.annual_salary}}</td>
+            <td ng-model="employee" ng-click="ec.activeToggle(employee)" ng-="">{{employee.active}}</td>
           </tr>
         </tbody>
       </table>
       <div id="salaryCalc">
         <h1>Total Monthly Salary Expenditure</h1>
-        <h3 ng-model="ec.salaries">${{ec.salaries[0].budget}}</h3>
+        <h3 ng-model="ec.salaries">${{ec.salaries}}</h3>
       </div>
     </section>
   </body>

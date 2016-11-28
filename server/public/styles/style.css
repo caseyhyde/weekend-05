@@ -26,6 +26,7 @@ label {
 
 table {
   margin: auto;
+  background-color: white;
 }
 
 h1, h2, #salaryCalc {
@@ -38,8 +39,8 @@ thead td {
 }
 
 tbody td {
-  background-color: black;
-  color: white;
+  /*background-color: black;*/
+  color: black;
   border-right: solid 2px lightgray;
   border-top: solid 2px lightgray;
 }

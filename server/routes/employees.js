@@ -63,6 +63,7 @@ router.put('/:id', function(req, res) {
 
     client.query('UPDATE employees SET active =  NOT active WHERE id=$1', [id],
     function(err, result) {
+      done();
       if(err) {
         console.log("Query error toggling active status");
         res.sendStatus(500);
