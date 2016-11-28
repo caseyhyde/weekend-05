@@ -43,18 +43,20 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="employee in ec.employees | filter:true">
+          <tr ng-repeat="employee in ec.employees | orderBy:'last_name'">
             <td ng-model="employee.first_name">{{employee.first_name}}</td>
             <td ng-model="employee.last_name">{{employee.last_name}}</td>
-            <td ng-model="employee.id">{{employee.employee_id}}</td>
+            <td ng-model="employee.employee_id">{{employee.employee_id}}</td>
             <td ng-model="employee.job_title">{{employee.job_title}}</td>
             <td ng-model="employee.annual_salary">{{employee.annual_salary}}</td>
             <td ng-model="employee.active" ng-click="ec.activeToggle(employee)">{{employee.active}}</td>
           </tr>
         </tbody>
       </table>
-      <h2>Total Monthly Salary Expenditure</h2>
-      <div id="salaryCalc" ng-model="ec.salary">${{ec.salary}}</div>
+      <div id="salaryCalc">
+        <h1>Total Monthly Salary Expenditure</h1>
+        <h3 ng-model="ec.salaries">${{ec.salaries[0].budget}}</h3>
+      </div>
     </section>
   </body>
 </html>

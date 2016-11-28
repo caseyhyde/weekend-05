@@ -4,6 +4,7 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 var path = require('path');
 var employees = require('./routes/employees');
+var salaries = require('./routes/salaries');
 var PORT = 3000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -16,6 +17,7 @@ app.get('/', function(req, res) {
 });
 
 app.use('/employees', employees);//end employees route
+app.use('/salaries', salaries);
 
 app.listen(PORT, function() {
   console.log("Now listening on port: ", PORT);

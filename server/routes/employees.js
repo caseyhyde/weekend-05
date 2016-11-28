@@ -1,5 +1,4 @@
 var express = require('express');
-var app = express();
 var router = express.Router();
 var pg = require('pg');
 var connectionString = ('postgres://localhost:5432/weekend-05');
@@ -8,8 +7,8 @@ router.get('/', function(req, res) {
   console.log("Request made to employees GET route");
   pg.connect(connectionString, function(err, client, done) {
     if(err) {
-      console.log("Error connection to database on GET employees request: ", err);
-      res.sendStatus(err);
+      console.log("Error connecting to database on GET employees request: ", err);
+      res.sendStatus(500);
     }
 
     client.query('SELECT * FROM employees', function(err, result) {
@@ -19,9 +18,9 @@ router.get('/', function(req, res) {
         res.sendStatus(500);
       }
       res.send(result.rows);
-    })//end query
-  })//end connect
-})//end route
+    });//end query
+  });//end connect
+});//end route
 
 
 router.post('/', function(req, res) {
@@ -37,7 +36,7 @@ router.post('/', function(req, res) {
     }
 
     client.query('INSERT INTO employees (first_name, last_name, employee_id, job_title, annual_salary) VALUES ($1, $2, $3, $4, $5)',
-    [newEmployee.first_name, newEmployee.last_name, newEmployee.id,
+    [newEmployee.first_name, newEmployee.last_name, newEmployee.employee_id,
     newEmployee.jobTitle, newEmployee.annual_salary],
     function(err, result) {
       done();
@@ -48,9 +47,9 @@ router.post('/', function(req, res) {
       } else {
         res.sendStatus(200);
       }
-    });
-  })//end connect
-})//end route
+    });//end query
+  });//end connect
+});//end route
 
 
 router.put('/:id', function(req, res) {
@@ -70,8 +69,8 @@ router.put('/:id', function(req, res) {
       } else {
         res.sendStatus(200);
       }
-    })//end query
-  })//end connect
+    });//end query
+  });//end connect
 });//end route
 
 module.exports = router;

@@ -1,25 +1,18 @@
 var myApp = angular.module('myApp', []);
 
 myApp.controller('employeesController', ["$http", function($http) {
-
   var self = this;
-
   self.employees = [];
-
   self.newEmployee = {};
-
-  self.salary = 0;
-
+  self.salaries = [];
   getEmployees();
-
-
 
   function getEmployees() {
     $http.get('/employees')
       .then(function(response) {
         self.employees = response.data
         console.log("employees: ", self.employees);
-        calcSalary();
+        getSalaries();
       });//end then
   }
 
@@ -28,6 +21,7 @@ myApp.controller('employeesController', ["$http", function($http) {
       .then(function(response) {
         console.log("New Employee: ", self.newEmployee);
         getEmployees();
+        self.newEmployee = {};
       })//end then
   }
 
@@ -39,12 +33,11 @@ myApp.controller('employeesController', ["$http", function($http) {
       })//end then
   }
 
-  function calcSalary() {
-    for (var i = 0; i < self.employees.length; i++) {
-      self.salary += self.employees[i].annual_salary;
-    }
-    self.salary /= 12;
+  function getSalaries() {
+    $http.get('/salaries')
+      .then(function(response) {
+        console.log("Received salary budget from server: ", response.data);
+        self.salaries = response.data;
+      });//end then
   }
-
-
 }]);
