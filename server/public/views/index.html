@@ -42,16 +42,18 @@
             <td>Job Title</td>
             <td>Annual Salary</td>
             <td>Active</td>
+            <td>Update</td>
           </tr>
         </thead>
         <tbody>
           <tr ng-repeat="employee in ec.employees | orderBy:'last_name'">
-            <td ng-model="employee">{{employee.first_name}}</td>
-            <td ng-model="employee">{{employee.last_name}}</td>
-            <td ng-model="employee">{{employee.employee_id}}</td>
-            <td ng-model="employee">{{employee.job_title}}</td>
-            <td ng-model="employee">${{employee.annual_salary}}</td>
-            <td ng-model="employee" ng-click="ec.activeToggle(employee)" ng-="">{{employee.active}}</td>
+            <td><input ng-model="employee.first_name" type="text" /></td>
+            <td><input ng-model="employee.last_name" type="text" /></td>
+            <td><input ng-model="employee.employee_id" type="text" /></td>
+            <td><input ng-model="employee.job_title" type="text" /></td>
+            <td><input ng-model="employee.annual_salary" type="text" /></td>
+            <td ng-click="ec.activeToggle(employee)">{{employee.active}}</td>
+            <td><button ng-click="ec.updateEmployee(employee)">update</button></td>
           </tr>
         </tbody>
       </table>

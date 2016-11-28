@@ -74,4 +74,30 @@ router.put('/:id', function(req, res) {
   });//end connect
 });//end route
 
+router.put('/update/:id', function(req, res) {
+  console.log("PUT request to update employee");
+  var id = req.params.id;
+  var employee = req.body;
+
+  pg.connect(connectionString, function(err, client, done) {
+    if(err) {
+      console.log("Error connecting to database to update employee active status: ", err);
+    }
+
+    client.query('UPDATE employees SET first_name=$1, ' +
+    'last_name=$2, employee_id=$3, job_title=$4, annual_salary=$5 ' +
+    'WHERE id=$6', [employee.first_name, employee.last_name, employee.employee_id,
+      employee.job_title, employee.annual_salary, id],
+    function(err, result) {
+      done();
+      if(err) {
+        console.log("Query error toggling active status");
+        res.sendStatus(500);
+      } else {
+        res.sendStatus(200);
+      }
+    });//end query
+  });//end connect
+});//end route
+
 module.exports = router;

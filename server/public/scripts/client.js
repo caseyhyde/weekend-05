@@ -33,6 +33,16 @@ myApp.controller('employeesController', ["$http", function($http) {
       })//end then
   }
 
+  self.updateEmployee = function(employee) {
+    console.log("Update employee clicked");
+    console.log("Sending data: ", employee);
+    console.log("Employees: ", self.employees);
+    $http.put('/employees/update/' + employee.id, employee)
+      .then(function(response) {
+        getEmployees();
+      })//end then
+  }
+
   function getSalaries() {
     $http.get('/salaries')
       .then(function(response) {
